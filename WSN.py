@@ -58,7 +58,7 @@ def plot_Square(nodes, avgDeg):
         else:
             c_map.append('yellow')
 
-    nx.draw(G, pos, node_size=4, node_color=c_map, alpha=0.7)
+    nx.draw(G, pos, node_size=4, node_color=c_map, alpha=0.5)
     plt.axis('equal')
     plt.show()
 
