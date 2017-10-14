@@ -28,6 +28,7 @@ no_of_cells = int(math.ceil((end_offset - start_offset) / r))
 
 done = False
 
+
 def cellMapping():
 
     for node in range(n):

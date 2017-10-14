@@ -21,8 +21,6 @@ c_map = []
 
 def plot_Square(nodes, avgDeg):
     start = timeit.default_timer()
-    # degree = {}
-    # c_map = []
     r = np.sqrt(avgDeg / (nodes * np.pi))
 
     coordinates = np.random.rand(nodes, 2)
@@ -80,8 +78,6 @@ def plot_Square(nodes, avgDeg):
 
 def plot_Disk(nodes, avgDeg):
     start = timeit.default_timer()
-    # degree = {}
-    # c_map = []
     r = np.sqrt(avgDeg / nodes)
 
     theta = np.random.uniform(0, 2 * np.pi, nodes)
