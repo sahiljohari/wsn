@@ -8,6 +8,7 @@ import numpy as np
 from scipy import spatial
 import networkx as nx
 import matplotlib.pyplot as plt
+from matplotlib import animation
 import timeit
 import operator
 import warnings
@@ -88,12 +89,17 @@ def plot_Graph(topology, nodes, avgDeg):
     print('-----------------------------')
     print('Elapsed time: ', timeit.default_timer() - start, 'second(s)')
 
-    nx.draw(G, pos, node_size=1, node_color=c_map, alpha=0.5, edge_color='#00916a')
-    nx.draw_networkx_edges(G, pos, edgelist=max_edges, edge_color='red', width=2.0)
-    nx.draw_networkx_edges(G, pos, edgelist=min_edges, edge_color='blue', width=2.0)
+
+    nx.draw_networkx_nodes(G, pos, node_size=1, node_color=c_map)
+    nx.draw_networkx_edges(G, pos, alpha=0.2, edge_color='#00916a')
+    # nx.draw(G, pos, node_size=1, node_color=c_map, alpha=0.5, edge_color='#00916a')
+    nx.draw_networkx_edges(G, pos, edgelist=max_edges, edge_color='red', width=1.0)
+    nx.draw_networkx_edges(G, pos, edgelist=min_edges, edge_color='blue', width=1.0)
+
+    plt.axis('off')
     plt.axis('equal')
     plt.show()
-    
+
 def main():
     nodes = int(input('Enter the number of nodes: '))
     expected_avg_deg = int(input('Enter the average degree: '))
