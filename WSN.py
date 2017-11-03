@@ -8,15 +8,11 @@ import numpy as np
 from scipy import spatial
 import networkx as nx
 import matplotlib.pyplot as plt
-from matplotlib import animation
 import timeit
 import operator
 import warnings
 
 warnings.filterwarnings("ignore")
-
-degree = {}
-c_map = []
 
 def generate_coordinates(topology, nodes):
     if topology == 0:
@@ -35,6 +31,11 @@ def generate_coordinates(topology, nodes):
     return coordinates
 
 def plot_Graph(topology, nodes, avgDeg):
+    degree = {}
+    c_map = []
+    max_edges = []
+    min_edges = []
+
     start = timeit.default_timer()
     if topology == 0:
         r = np.sqrt(avgDeg / (nodes * np.pi))
@@ -56,9 +57,6 @@ def plot_Graph(topology, nodes, avgDeg):
 
     observed_avg_deg = total_deg / nodes
 
-    max_edges = []
-    min_edges = []
-
     max_node = [k for k, v in degree.items() if v == max_deg]
     min_node = [k for k, v in degree.items() if v == min_deg]
  
@@ -71,6 +69,7 @@ def plot_Graph(topology, nodes, avgDeg):
     G = nx.Graph()
     G.add_nodes_from(range(nodes))
     G.add_edges_from(list(pairs))
+    pos = dict(zip(range(nodes), coordinates))
 
     for node in G:
         if node in max_node:
@@ -80,7 +79,6 @@ def plot_Graph(topology, nodes, avgDeg):
         else:
             c_map.append('black')
 
-    pos = dict(zip(range(nodes), coordinates))
     print('\n-----------------------------')
     print('No. of edges: ', len(pairs))
     print('Max Degree: ', max_deg)
@@ -90,9 +88,7 @@ def plot_Graph(topology, nodes, avgDeg):
     print('Elapsed time: ', timeit.default_timer() - start, 'second(s)')
 
 
-    nx.draw_networkx_nodes(G, pos, node_size=1, node_color=c_map)
-    nx.draw_networkx_edges(G, pos, alpha=0.2, edge_color='#00916a')
-    # nx.draw(G, pos, node_size=1, node_color=c_map, alpha=0.5, edge_color='#00916a')
+    nx.draw(G, pos, node_size=1, node_color=c_map, alpha=0.5, edge_color='#00916a')
     nx.draw_networkx_edges(G, pos, edgelist=max_edges, edge_color='red', width=1.0)
     nx.draw_networkx_edges(G, pos, edgelist=min_edges, edge_color='blue', width=1.0)
 
