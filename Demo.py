@@ -1,117 +1,62 @@
-import pygame
-import random
-import timeit
-import math
-import numpy as np
+from tkinter import *
+import tkinter.messagebox as msg
 
-pygame.init()
-display_width = 500
-display_height = 500
-clock = pygame.time.Clock()
-graphDisplay = pygame.display.set_mode((display_width, display_height))
-pygame.display.set_caption('Wireless Sensor Network Graph')
-white = (255, 255, 255)
-green = (0, 155, 0)
+class GUI:
+    def __init__(self, master):
+        frame = Frame(master)
+        frame.pack()
 
-n = 4000
-avg_degree = 32
+        self.drawButton = Button(frame, text='Plot', command=self.plotGraph)
+        self.drawButton.pack(side=LEFT)
 
-X_coordinates = []
-Y_coordinates = []
-cell_map = []
+        self.quitButton = Button(frame, text='Quit', command=frame.quit)
+        self.quitButton.pack(side=LEFT)
 
-start_offset = 0
-end_offset = 500
+    def plotGraph(self):
+        print('And it gets plotted')
 
-r = math.sqrt(avg_degree / (n * math.pi)) * (end_offset - start_offset)
-no_of_cells = int(math.ceil((end_offset - start_offset) / r))
+def dummy():
+    print('Doing nothing')
 
-done = False
+root = Tk()
+# gui = GUI(root)
+# Message Box
+msg.showinfo('Message', 'Fuck you!')
+def wannaquit():
+    response = msg.askquestion('Q1', 'Do you fuck?')
+
+    if response == 'yes':
+        root.quit()
+
+# Menu
+menu = Menu(root)
+root.config(menu=menu)
+
+subMenu = Menu(menu)
+menu.add_cascade(label='File', menu=subMenu)
+subMenu.add_command(label='New', command=dummy)
+subMenu.add_command(label='Configure', command=dummy)
+subMenu.add_separator()
+subMenu.add_command(label='Quit', command=wannaquit)
+
+animMenu = Menu(menu)
+menu.add_cascade(label='Edit', menu=animMenu)
+animMenu.add_command(label='Draw nodes', command=dummy)
+animMenu.add_command(label='Draw Edges', command=dummy)
+animMenu.add_separator()
+animMenu.add_command(label='Clear', command=wannaquit)
+
+# Toolbar
+toolbar = Frame(root, bg = 'yellow')
+insertButtons = Button(toolbar, text='Plot', command=dummy)
+insertButtons.pack(side=LEFT, padx=2, pady=2)
+
+toolbar.pack(side=TOP, fill=X)
+
+# Status Bar
+status = Label(root, text='Do nothing', bd=1, relief=SUNKEN, anchor=W)
+status.pack(side=BOTTOM, fill=X)
 
 
-def cellMapping():
 
-    for node in range(n):
-        X_coordinates.append(random.randint(start_offset, end_offset))
-        Y_coordinates.append(random.randint(start_offset, end_offset))
-
-    X_coordinates.sort()
-    # start = timeit.default_timer()
-    for cell_y in np.arange(start_offset, start_offset + (no_of_cells * r), r):
-        for cell_x in np.arange(start_offset, start_offset + no_of_cells * r, r):
-
-            primary_cell = []
-            adjacent_cell1 = []
-            adjacent_cell2 = []
-            adjacent_cell3 = []
-            adjacent_cell4 = []
-
-            for i in range(n):
-                if cell_x < X_coordinates[i] < (cell_x + r) + start_offset and cell_y <= Y_coordinates[i] <= cell_y + r:
-                    primary_cell.append((X_coordinates[i], Y_coordinates[i]))
-
-                if cell_x - r < X_coordinates[i] <= cell_x and cell_y + r < Y_coordinates[i] <= cell_y + r + r and (math.ceil(cell_x/r)+1 != 1 or math.ceil(cell_x/r)+1 == no_of_cells):
-                    adjacent_cell1.append((X_coordinates[i], Y_coordinates[i]))
-
-                if cell_x < X_coordinates[i] <= cell_x + r + start_offset and cell_y + r < Y_coordinates[i] <= cell_y + r + r:
-                    adjacent_cell2.append((X_coordinates[i], Y_coordinates[i]))
-
-                if cell_x + r < X_coordinates[i] <= cell_x + r + start_offset + r and cell_y + r < Y_coordinates[i] <= cell_y + r + r and (math.ceil(cell_x/r)+1 == 1 or math.ceil(cell_x/r)+1 != no_of_cells):
-                    adjacent_cell3.append((X_coordinates[i], Y_coordinates[i]))
-
-                if cell_x + r < X_coordinates[i] <= cell_x + r + start_offset + r and cell_y < Y_coordinates[i] <= cell_y + r and (math.ceil(cell_x/r)+1 == 1 or math.ceil(cell_x/r)+1 != no_of_cells):
-                    adjacent_cell4.append((X_coordinates[i], Y_coordinates[i]))
-
-            cell_map.append([primary_cell, adjacent_cell1, adjacent_cell2, adjacent_cell3, adjacent_cell4])
-
-def process(srcCell, destCell, r_adjacency):
-    line = []
-    for x in srcCell:
-        for y in destCell:
-            if x != y:
-                distance = ((y[0] - x[0]) ** 2) + ((y[1] - x[1]) ** 2)
-                if distance < (r_adjacency ** 2):
-                    line_coordinates = []
-                    line_coordinates.append(x[0])
-                    line_coordinates.append(x[1])
-                    line_coordinates.append(y[0])
-                    line_coordinates.append(y[1])
-                    line.append(line_coordinates)
-    return line
-
-def plotGraph(nodes_count, r_adjacency):
-
-    while not done:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q:
-                    pygame.quit()
-                    quit()
-
-        # Draw nodes
-        for nodes in range(nodes_count):
-            pygame.draw.circle(graphDisplay, green, (X_coordinates[nodes], Y_coordinates[nodes]), 2, 0)
-
-        # Draw edges
-        for cell_set in cell_map:
-            for adj in cell_set:
-                if adj:
-                    for coordinates in process(cell_set[0], adj, r_adjacency):
-                        pygame.draw.line(graphDisplay, white, (coordinates[0], coordinates[1]),
-                                         (coordinates[2], coordinates[3]), 1)
-
-        pygame.display.update()
-        clock.tick(60)
-
-def main():
-
-    start = timeit.default_timer()
-    cellMapping()
-    end = timeit.default_timer()
-    print "\nElapsed time:" + str(end - start)
-
-    plotGraph(n, r)
-main()
+root.mainloop()

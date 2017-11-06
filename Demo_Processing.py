@@ -1,120 +1,165 @@
-import pyglet
-import random
-import timeit
-import math
+# import matplotlib
+# matplotlib.use('TkAgg')
+#
+# from numpy import arange, sin, pi
+# from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
+# # implement the default mpl key bindings
+# from matplotlib.backend_bases import key_press_handler
+#
+#
+# from matplotlib.figure import Figure
+#
+# import sys
+# if sys.version_info[0] < 3:
+#     import Tkinter as Tk
+# else:
+#     import tkinter as Tk
+#
+# root = Tk.Tk()
+# root.wm_title("Embedding in TK")
+#
+#
+# f = Figure(figsize=(5, 4), dpi=100)
+# a = f.add_subplot(111)
+# t = arange(0.0, 3.0, 0.01)
+# s = sin(2*pi*t)
+#
+# a.plot(t, s)
+#
+#
+# # a tk.DrawingArea
+# canvas = FigureCanvasTkAgg(f, master=root)
+# canvas.show()
+# canvas.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
+#
+# toolbar = NavigationToolbar2TkAgg(canvas, root)
+# toolbar.update()
+# canvas._tkcanvas.pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
+#
+#
+# def on_key_event(event):
+#     print('you pressed %s' % event.key)
+#     key_press_handler(event, canvas, toolbar)
+#
+# canvas.mpl_connect('key_press_event', on_key_event)
+#
+#
+# def _quit():
+#     root.quit()     # stops mainloop
+#     root.destroy()  # this is necessary on Windows to prevent
+#                     # Fatal Python Error: PyEval_RestoreThread: NULL tstate
+#
+# button = Tk.Button(master=root, text='Quit', command=_quit)
+# button.pack(side=Tk.BOTTOM)
+#
+# Tk.mainloop()
+# # If you put root.destroy() here, it will cause an error if
+# # the window is closed with the window manager.
+
+# import matplotlib
+# matplotlib.use('TkAgg')
+#
+# from numpy import arange, sin, pi
+# from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+# from matplotlib.figure import Figure
+#
+# import sys
+# if sys.version_info[0] < 3:
+#     import Tkinter as Tk
+# else:
+#     import tkinter as Tk
+#
+#
+# def destroy(e):
+#     sys.exit()
+#
+# root = Tk.Tk()
+# root.wm_title("Embedding in TK")
+#
+#
+# f = Figure(figsize=(5, 4), dpi=100)
+# a = f.add_subplot(111)
+# t = arange(0.0, 3.0, 0.01)
+# s = sin(2*pi*t)
+#
+# a.plot(t, s)
+# a.set_title('Tk embedding')
+# a.set_xlabel('X axis label')
+# a.set_ylabel('Y label')
+#
+#
+# # a tk.DrawingArea
+# canvas = FigureCanvasTkAgg(f, master=root)
+# canvas.show()
+# canvas.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
+#
+# canvas._tkcanvas.pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
+#
+# button = Tk.Button(master=root, text='Quit', command=sys.exit)
+# button.pack(side=Tk.BOTTOM)
+#
+# Tk.mainloop()
+
 import numpy as np
+import tkinter as tk
 
-white = (255, 255, 255)
-green = (0, 155, 0)
+import matplotlib
+matplotlib.use('TkAgg')
 
-n = 5
-avg_degree = 5
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import matplotlib.pyplot as plt
 
-X_coordinates = []
-Y_coordinates = []
-cell_map = []
+root = tk.Tk()
 
-start_offset = 0
-end_offset = 500
+fig = plt.figure(1)
+plt.ion()
+t = np.arange(0.0,3.0,0.01)
+s = np.sin(np.pi*t)
+plt.plot(t,s)
 
-r = math.sqrt(avg_degree / (n * math.pi)) * (end_offset - start_offset)
-no_of_cells = int(math.ceil((end_offset - start_offset) / r))
+canvas = FigureCanvasTkAgg(fig, master=root)
+plot_widget = canvas.get_tk_widget()
 
-window = pyglet.window.Window(500, 500)
-# pyglet.gl.glClearColor(0.5,0.5,0.5,1)
-# pyglet.gl.glEnable(pyglet.gl.GL_BLEND)
-# pyglet.gl.glBlendFunc(pyglet.gl.GL_SRC_ALPHA, pyglet.gl.GL_ONE_MINUS_SRC_ALPHA)
+def update():
+    s = np.cos(np.pi*t)
+    plt.plot(t,s)
+    #d[0].set_ydata(s)
+    fig.canvas.draw()
 
-def cellMapping():
+plot_widget.grid(row=0, column=0)
+tk.Button(root,text="Update",command=update).grid(row=0, column=1)
+root.mainloop()
 
-    for node in range(n):
-        X_coordinates.append(random.randint(start_offset, end_offset))
-        Y_coordinates.append(random.randint(start_offset, end_offset))
+#!/usr/bin/python3
 
-    X_coordinates.sort()
-    # start = timeit.default_timer()
-    for cell_y in np.arange(start_offset, start_offset + (no_of_cells * r), r):
-        for cell_x in np.arange(start_offset, start_offset + no_of_cells * r, r):
-
-            primary_cell = []
-            adjacent_cell1 = []
-            adjacent_cell2 = []
-            adjacent_cell3 = []
-            adjacent_cell4 = []
-
-
-            for i in range(n):
-                if cell_x < X_coordinates[i] < (cell_x + r) + start_offset and cell_y <= Y_coordinates[i] <= cell_y + r:
-                    primary_cell.append((X_coordinates[i], Y_coordinates[i]))
-
-                if cell_x - r < X_coordinates[i] <= cell_x and cell_y + r < Y_coordinates[i] <= cell_y + r + r and (math.ceil(cell_x/r)+1 != 1 or math.ceil(cell_x/r)+1 == no_of_cells):
-                    adjacent_cell1.append((X_coordinates[i], Y_coordinates[i]))
-
-                if cell_x < X_coordinates[i] <= cell_x + r + start_offset and cell_y + r < Y_coordinates[i] <= cell_y + r + r:
-                    adjacent_cell2.append((X_coordinates[i], Y_coordinates[i]))
-
-                if cell_x + r < X_coordinates[i] <= cell_x + r + start_offset + r and cell_y + r < Y_coordinates[i] <= cell_y + r + r and (math.ceil(cell_x/r)+1 == 1 or math.ceil(cell_x/r)+1 != no_of_cells):
-                    adjacent_cell3.append((X_coordinates[i], Y_coordinates[i]))
-
-                if cell_x + r < X_coordinates[i] <= cell_x + r + start_offset + r and cell_y < Y_coordinates[i] <= cell_y + r and (math.ceil(cell_x/r)+1 == 1 or math.ceil(cell_x/r)+1 != no_of_cells):
-                    adjacent_cell4.append((X_coordinates[i], Y_coordinates[i]))
-
-            cell_map.append([primary_cell, adjacent_cell1, adjacent_cell2, adjacent_cell3, adjacent_cell4])
-
-def process(srcCell, destCell, r_adjacency):
-    line = []
-    for x in srcCell:
-        for y in destCell:
-            if x != y and x[0] < y[0]:
-                distance = ((y[0] - x[0]) ** 2) + ((y[1] - x[1]) ** 2)
-                if distance < (r_adjacency ** 2):
-                    line_coordinates = []
-                    line_coordinates.append(x[0])
-                    line_coordinates.append(x[1])
-                    line_coordinates.append(y[0])
-                    line_coordinates.append(y[1])
-                    line.append(line_coordinates)
-    return line
-
-def plotGraph(nodes_count, r_adjacency):
-
-    @window.event
-    def on_draw():
-        window.clear()
-        edges = 0
-        # Draw edges
-        for cell_set in cell_map:
-            for adj in cell_set:
-                if adj:
-                    for coordinates in process(cell_set[0], adj, r_adjacency):
-                        pyglet.graphics.draw(2, pyglet.gl.GL_LINES,
-                                             ('v2i', (coordinates[0], coordinates[1], coordinates[2], coordinates[3])),
-                                             ('c3B', (255, 0, 0,
-                                                      255, 0, 0)))
-                        edges += 1
-                        # pyglet.gl.glEnable(pyglet.gl.GL_BLEND)
-                        # pyglet.gl.glBlendFunc(pyglet.gl.GL_SRC_ALPHA, pyglet.gl.GL_ONE_MINUS_SRC_ALPHA)
-
-        # Draw nodes
-        for node in range(nodes_count):
-            pyglet.graphics.draw(1, pyglet.gl.GL_POINTS,
-                                 ('v2i', (X_coordinates[node], Y_coordinates[node])),
-                                 ('c3B', (255, 255, 0))
-                                 )
-        print('No. of edges: '+str(edges))
-
-
-
-def main():
-
-    start = timeit.default_timer()
-    cellMapping()
-    plotGraph(n, r)
-    end = timeit.default_timer()
-    print "\nElapsed time:" + str(end - start)
-    pyglet.app.run()
-
-main()
-
-
-
+# from tkinter import *
+# fields = 'Nodes', 'Average Degree', 'Topology', 'Show Graph Coloring'
+#
+# def fetch(entries):
+#    for entry in entries:
+#       field = entry[0]
+#       text  = entry[1].get()
+#       print('%s: "%s"' % (field, text))
+#
+# def makeform(root, fields):
+#    entries = []
+#    for field in fields:
+#       row = Frame(root)
+#       lab = Label(row, width=15, text=field, anchor='w')
+#       ent = Entry(row)
+#       row.pack(side=TOP, fill=X, padx=5, pady=5)
+#       lab.pack(side=LEFT)
+#       ent.pack(side=RIGHT, expand=YES, fill=X)
+#       entries.append((field, ent))
+#    return entries
+#
+# if __name__ == '__main__':
+#    root = Tk()
+#    ents = makeform(root, fields)
+#    root.bind('<Return>', (lambda event, e=ents: fetch(e)))
+#    b1 = Button(root, text='Show',
+#           command=(lambda e=ents: fetch(e)))
+#    b1.pack(side=LEFT, padx=5, pady=5)
+#    b2 = Button(root, text='Quit', command=root.quit)
+#    b2.pack(side=LEFT, padx=5, pady=5)
+#    root.mainloop()
