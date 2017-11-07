@@ -48,6 +48,7 @@ def smallest_last_ordering(degree, adjacency_list):
     node_stack = []
     degreeTemp = {}
     terminal_size = 0
+    degreeDeletion = {}
     for key, val in degree.items():
         degreeTemp.setdefault(val, []).append(key)
 
@@ -86,6 +87,8 @@ def smallest_last_ordering(degree, adjacency_list):
         if len(adjacency_list)-1 == counter and terminal_size == 0:
             terminal_size = counter + 1
         del adjacency_list[popped_node]
+
+        degreeDeletion[popped_node] = min_deg
     return node_stack, terminal_size
 
 def graph_coloring(node_stack, adjacency_list):
