@@ -17,6 +17,7 @@ import timeit
 import operator
 import warnings
 import copy
+import collections
 
 warnings.filterwarnings("ignore")
 
@@ -46,6 +47,7 @@ def random_color():
 def smallest_last_ordering(degree, adjacency_list):
     node_stack = []
     degreeTemp = {}
+    terminal_size = 0
     for key, val in degree.items():
         degreeTemp.setdefault(val, []).append(key)
 
@@ -66,6 +68,8 @@ def smallest_last_ordering(degree, adjacency_list):
         popped_node = min_nodes.pop()
         if not min_nodes:
             del degreeTemp[min_deg]
+
+        counter = 0
         for item in adjacency_list[popped_node]:
             adjacency_list[item].remove(popped_node)
             d = degree[item]
@@ -76,10 +80,13 @@ def smallest_last_ordering(degree, adjacency_list):
 
             degreeTemp.setdefault(d-1, []).append(item)
             degree[item] -= 1
-
+            counter += 1
         node_stack.append(popped_node)
+
+        if len(adjacency_list)-1 == counter and terminal_size == 0:
+            terminal_size = counter + 1
         del adjacency_list[popped_node]
-    return node_stack
+    return node_stack, terminal_size
 
 def graph_coloring(node_stack, adjacency_list):
     color_map = {}
@@ -111,8 +118,8 @@ def graph_coloring(node_stack, adjacency_list):
 def plot_Graph(topology, nodes, avgDeg, coloring):
     degree = {}
     adjacency_list = {}
-    # color_map = {}
-    c_map = []
+    color_data = {}
+    # c_map = []
     max_edges = []
     min_edges = []
 
@@ -121,6 +128,8 @@ def plot_Graph(topology, nodes, avgDeg, coloring):
         r = np.sqrt(avgDeg / (nodes * np.pi))
     elif topology == 1:
         r = np.sqrt(avgDeg / nodes)
+    else:
+        r = 0
 
     coordinates = generate_coordinates(topology, nodes)
 
@@ -170,7 +179,7 @@ def plot_Graph(topology, nodes, avgDeg, coloring):
     edge_color = '#00916a'
 
     adjlist_copy = copy.deepcopy(adjacency_list)
-    node_stack = smallest_last_ordering(degree, adjlist_copy)
+    node_stack, terminal_size = smallest_last_ordering(degree, adjlist_copy)
     color_map, clist = graph_coloring(node_stack, adjacency_list)
 
     c_map = [None] * nodes
@@ -180,12 +189,21 @@ def plot_Graph(topology, nodes, avgDeg, coloring):
         else:
             c_map[i] = clist[0]
 
+    for k,v in color_map.items():
+        color_data.setdefault(v, []).append(k)
+
+    color_data = {k: len(color_data[k]) for k in color_data.keys()}
+    max_color = max(color_data.items(), key=operator.itemgetter(1))[1]
+
     print('\n-----------------------------')
-    print('No. of edges: ', len(pairs))
+    print('Number of edges: ', len(pairs))
     print('Max Degree: ', max_deg)
     print('Min Degree: ', min_deg)
     print('Average Degree: ', observed_avg_deg)
-    print('-----------------------------')
+    print('Terminal Clique Size: ', terminal_size)
+    print('Number of Colors used: ', len(clist))
+    print('Maximum Color Size: ', max_color)
+    print('-----------------------------\n')
     print('Elapsed time: ', timeit.default_timer() - start, 'second(s)')
 
     # nx.draw(G, pos, node_size=1, node_color=c_map, alpha=0.5, edge_color='#00916a')
