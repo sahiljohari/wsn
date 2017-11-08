@@ -44,22 +44,10 @@ def smallest_last_ordering(degree, adjacency_list):
     node_stack = []
     degreeBucket = {}
     terminal_size = 0
-    # degreeDeletion = {}
+
     for key, val in degree.items():
         degreeBucket.setdefault(val, []).append(key)
 
-    # 1. Loop degree and find min degree inside the loop
-    # while degree:
-    #     min_deg, min_node = min(degreeBucket.items(), key=operator.itemgetter(0))
-    # # 2. Iterate values of node with min degree in adjacency list
-    # # 3. Decrement degree of each nodes corresponding to min node
-    #     popped_node = min_node.pop()
-    #     for item in adjacency_list[popped_node]:
-    #         if item in degree:
-    #             # d = degree[item]
-    #             adjacency_list[item].remove(popped_node)
-    #             degree[item] -= 1
-    #             degreeBucket.setdefault(min_deg-1, []).append(item)
     while adjacency_list:
         min_deg, min_nodes = min(degreeBucket.items(), key=operator.itemgetter(0))
         popped_node = min_nodes.pop()
@@ -84,7 +72,6 @@ def smallest_last_ordering(degree, adjacency_list):
             terminal_size = counter + 1
         del adjacency_list[popped_node]
 
-        # degreeDeletion[popped_node] = min_deg
     return node_stack, terminal_size
 
 def graph_coloring(node_stack, adjacency_list):
@@ -233,7 +220,7 @@ def main():
     nodes = int(input('Enter the number of nodes: '))
     expected_avg_deg = int(input('Enter the average degree: '))
     topology = int(input('Select a topology - 0 (plane) | 1 (disk): '))
-    display_mode = int(input('Select display - 1 (Smallest last Ordering) | 2 (Coloring) | 0 (RGG plot): '))
+    display_mode = int(input('Select display - ''0'' (RGG plot) | ''1'' (Smallest last Ordering) | ''2'' (Coloring): '))
 
     if display_mode in (0, 1, 2):
         plot_Graph(topology, nodes, expected_avg_deg, display_mode)
