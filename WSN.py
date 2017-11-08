@@ -4,20 +4,16 @@
 Created on Thu Oct  5 19:36:49 2017
 @author: Sahil Johari
 """
-# import matplotlib
-# matplotlib.use('TkAgg')
 import numpy as np
 from scipy import spatial
 import networkx as nx
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 
-# from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-# import tkinter as tk
 import timeit
 import operator
 import warnings
 import copy
-import collections
 
 warnings.filterwarnings("ignore")
 
@@ -46,15 +42,15 @@ def random_color():
 
 def smallest_last_ordering(degree, adjacency_list):
     node_stack = []
-    degreeTemp = {}
+    degreeBucket = {}
     terminal_size = 0
-    degreeDeletion = {}
+    # degreeDeletion = {}
     for key, val in degree.items():
-        degreeTemp.setdefault(val, []).append(key)
+        degreeBucket.setdefault(val, []).append(key)
 
     # 1. Loop degree and find min degree inside the loop
     # while degree:
-    #     min_deg, min_node = min(degreeTemp.items(), key=operator.itemgetter(0))
+    #     min_deg, min_node = min(degreeBucket.items(), key=operator.itemgetter(0))
     # # 2. Iterate values of node with min degree in adjacency list
     # # 3. Decrement degree of each nodes corresponding to min node
     #     popped_node = min_node.pop()
@@ -63,23 +59,23 @@ def smallest_last_ordering(degree, adjacency_list):
     #             # d = degree[item]
     #             adjacency_list[item].remove(popped_node)
     #             degree[item] -= 1
-    #             degreeTemp.setdefault(min_deg-1, []).append(item)
+    #             degreeBucket.setdefault(min_deg-1, []).append(item)
     while adjacency_list:
-        min_deg, min_nodes = min(degreeTemp.items(), key=operator.itemgetter(0))
+        min_deg, min_nodes = min(degreeBucket.items(), key=operator.itemgetter(0))
         popped_node = min_nodes.pop()
         if not min_nodes:
-            del degreeTemp[min_deg]
+            del degreeBucket[min_deg]
 
         counter = 0
         for item in adjacency_list[popped_node]:
             adjacency_list[item].remove(popped_node)
             d = degree[item]
-            degreeTemp[d].remove(item)
+            degreeBucket[d].remove(item)
 
-            if not degreeTemp[d]:
-                del degreeTemp[d]
+            if not degreeBucket[d]:
+                del degreeBucket[d]
 
-            degreeTemp.setdefault(d-1, []).append(item)
+            degreeBucket.setdefault(d-1, []).append(item)
             degree[item] -= 1
             counter += 1
         node_stack.append(popped_node)
@@ -88,7 +84,7 @@ def smallest_last_ordering(degree, adjacency_list):
             terminal_size = counter + 1
         del adjacency_list[popped_node]
 
-        degreeDeletion[popped_node] = min_deg
+        # degreeDeletion[popped_node] = min_deg
     return node_stack, terminal_size
 
 def graph_coloring(node_stack, adjacency_list):
@@ -118,11 +114,11 @@ def graph_coloring(node_stack, adjacency_list):
         color_map[popped_node] = clist[c_index]
     return color_map, clist
 
-def plot_Graph(topology, nodes, avgDeg, coloring):
+def plot_Graph(topology, nodes, avgDeg, display_mode):
     degree = {}
     adjacency_list = {}
     color_data = {}
-    # c_map = []
+    c_map = []
     max_edges = []
     min_edges = []
 
@@ -167,65 +163,67 @@ def plot_Graph(topology, nodes, avgDeg, coloring):
 
     G = nx.Graph()
     G.add_nodes_from(range(nodes))
-    G.add_edges_from(list(pairs))
+    if display_mode == 1 or display_mode == 0:
+        G.add_edges_from(list(pairs))
     pos = dict(zip(range(nodes), coordinates))
 
-    # for node in G:
-    #     if node in max_node:
-    #         c_map.append('red')
-    #     elif node in min_node or (min_deg == 0 and node not in min_node):   #Bug here
-    #         c_map.append('blue')
-    #     else:
-    #         c_map.append('black')
+    if display_mode == 0:
+        for node in G:
+            if node in max_node:
+                c_map.append('red')
+            elif node in min_node:
+                c_map.append('blue')
+            else:
+                c_map.append('black')
 
-    node_size = 40
-    edge_color = '#00916a'
+    if display_mode == 1 or display_mode == 2:
+        adjlist_copy = copy.deepcopy(adjacency_list)
+        node_stack, terminal_size = smallest_last_ordering(degree, adjlist_copy)
+        if display_mode == 2:
+            node_stack_copy = copy.deepcopy(node_stack)
+            color_map, clist = graph_coloring(node_stack_copy, adjacency_list)
+            c_map = [None] * nodes
+            for i in range(nodes):
+                if i in color_map:
+                    c_map[i] = color_map[i]
+                else:
+                    c_map[i] = clist[0]
 
-    adjlist_copy = copy.deepcopy(adjacency_list)
-    node_stack, terminal_size = smallest_last_ordering(degree, adjlist_copy)
-    color_map, clist = graph_coloring(node_stack, adjacency_list)
+            for k,v in color_map.items():
+                color_data.setdefault(v, []).append(k)
 
-    c_map = [None] * nodes
-    for i in range(nodes):
-        if i in color_map:
-            c_map[i] = color_map[i]
-        else:
-            c_map[i] = clist[0]
-
-    for k,v in color_map.items():
-        color_data.setdefault(v, []).append(k)
-
-    color_data = {k: len(color_data[k]) for k in color_data.keys()}
-    max_color = max(color_data.items(), key=operator.itemgetter(1))[1]
+            color_data = {k: len(color_data[k]) for k in color_data.keys()}
+            max_color = max(color_data.items(), key=operator.itemgetter(1))[1]
 
     print('\n-----------------------------')
     print('Number of edges: ', len(pairs))
     print('Max Degree: ', max_deg)
     print('Min Degree: ', min_deg)
     print('Average Degree: ', observed_avg_deg)
-    print('Terminal Clique Size: ', terminal_size)
-    print('Number of Colors used: ', len(clist))
-    print('Maximum Color Size: ', max_color)
+    if display_mode == 1:
+        print('Terminal Clique Size: ', terminal_size)
+    if display_mode == 2:
+        print('Number of Colors used: ', len(clist))
+        print('Maximum Color Size: ', max_color)
     print('-----------------------------\n')
     print('Elapsed time: ', timeit.default_timer() - start, 'second(s)')
 
-    # nx.draw(G, pos, node_size=1, node_color=c_map, alpha=0.5, edge_color='#00916a')
-    # nx.draw_networkx_edges(G, pos, edgelist=max_edges, edge_color='red', width=1.0)
-    # nx.draw_networkx_edges(G, pos, edgelist=min_edges, edge_color='blue', width=1.0)
+    if display_mode == 0:
+        nx.draw(G, pos, node_size=2, node_color=c_map, alpha=0.5, edge_color='#00916a')
+        nx.draw_networkx_edges(G, pos, edgelist=max_edges, edge_color='red', width=1.0)
+        nx.draw_networkx_edges(G, pos, edgelist=min_edges, edge_color='blue', width=1.0)
+    elif display_mode == 1:
+        fig = plt.figure()
+        def animate(i):
+            if node_stack[i] in G.nodes():
+                plt.clf()
+                plt.axis('equal')
+                G.remove_node(node_stack[i])
+                nx.draw(G, pos, node_size=20, alpha=0.9, edge_color='#000000')
 
-    # def init():
-    #     return nx.draw(G, pos, node_size=1, node_color=c_map, alpha=0.5, edge_color='#00916a')
-    #
-    # def animate(i):
-    #     if node_stack[i] in G.nodes():
-    #         # print(G.nodes())
-    #         plt.clf()
-    #         plt.axis('equal')
-    #         G.remove_node(node_stack[i])
-    #     nx.draw(G, pos, node_size=1, node_color=c_map, alpha=0.5, edge_color='#00916a')
-    # anim = animation.FuncAnimation(fig, animate, frames=len(node_stack), interval=1)
-
-    nx.draw(G, pos, node_size=node_size, node_color=c_map, edge_color=edge_color, alpha=0.9)
+        anim = animation.FuncAnimation(fig, animate, frames=len(node_stack), interval=500)
+    elif display_mode == 2:
+        nx.draw(G, pos, node_size=5, node_color=c_map, edge_color='#000000')
 
     plt.axis('off')
     plt.axis('equal')
@@ -235,9 +233,12 @@ def main():
     nodes = int(input('Enter the number of nodes: '))
     expected_avg_deg = int(input('Enter the average degree: '))
     topology = int(input('Select a topology - 0 (plane) | 1 (disk): '))
-    coloring = input('Enable coloring - Y|N: ')
+    display_mode = int(input('Select display - 1 (Smallest last Ordering) | 2 (Coloring) | 0 (RGG plot): '))
 
-    plot_Graph(topology, nodes, expected_avg_deg, coloring)
+    if display_mode in (0, 1, 2):
+        plot_Graph(topology, nodes, expected_avg_deg, display_mode)
+    else:
+        print('Invalid input! Try again..')
 
 
 if __name__ == "__main__":
