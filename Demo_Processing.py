@@ -112,7 +112,7 @@ import matplotlib.pyplot as plt
 root = tk.Tk()
 
 fig = plt.figure(1)
-plt.ion()
+# plt.ion()
 t = np.arange(0.0,3.0,0.01)
 s = np.sin(np.pi*t)
 plt.plot(t,s)

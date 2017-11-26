@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="15a849c2-25a5-4182-93b8-820e5dd11566" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Demo_Processing.py" afterPath="$PROJECT_DIR$/Demo_Processing.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WSN.py" afterPath="$PROJECT_DIR$/WSN.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -13,24 +15,24 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Project$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1509692409985" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
-    <SUITE FILE_PATH="coverage/Project$WSN.coverage" NAME="WSN Coverage Results" MODIFIED="1510177170965" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Project$WSN.coverage" NAME="WSN Coverage Results" MODIFIED="1511666331481" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Project$scratch_6.coverage" NAME="scratch_6 Coverage Results" MODIFIED="1511581178721" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
     <SUITE FILE_PATH="coverage/Project$scratch_2.coverage" NAME="scratch_2 Coverage Results" MODIFIED="1509936077171" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
-    <SUITE FILE_PATH="coverage/Project$Demo_Processing.coverage" NAME="Demo_Processing Coverage Results" MODIFIED="1510000355854" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project$scratch_4.coverage" NAME="scratch_4 Coverage Results" MODIFIED="1510038321131" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
+    <SUITE FILE_PATH="coverage/Project$Demo_Processing.coverage" NAME="Demo_Processing Coverage Results" MODIFIED="1511337856800" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Project$scratch_5.coverage" NAME="scratch_5 Coverage Results" MODIFIED="1510138365638" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
     <SUITE FILE_PATH="coverage/Project$Demo.coverage" NAME="Demo Coverage Results" MODIFIED="1509867107759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Project$scratch_3.coverage" NAME="scratch_3 Coverage Results" MODIFIED="1510075442059" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
+    <SUITE FILE_PATH="coverage/Project$scratch_3.coverage" NAME="scratch_3 Coverage Results" MODIFIED="1511474812596" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="Demo.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Demo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
+            <state relative-caret-position="500">
               <caret line="30" column="6" lean-forward="false" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-                <element signature="e#71#444#0" expanded="false" />
                 <element signature="e#416#444#0" expanded="false" />
                 <element signature="e#589#686#0" expanded="false" />
               </folding>
@@ -41,8 +43,8 @@
       <file leaf-file-name="Demo_Processing.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Demo_Processing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2200">
-              <caret line="113" column="19" lean-forward="false" selection-start-line="113" selection-start-column="19" selection-end-line="113" selection-end-column="19" />
+            <state relative-caret-position="2240">
+              <caret line="115" column="4" lean-forward="false" selection-start-line="115" selection-start-column="4" selection-end-line="115" selection-end-column="4" />
               <folding>
                 <element signature="e#2436#2454#0" expanded="true" />
               </folding>
@@ -53,42 +55,31 @@
       <file leaf-file-name="WSN.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/WSN.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="scratch_4.py" pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_4.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3600">
-              <caret line="269" column="16" lean-forward="false" selection-start-line="269" selection-start-column="16" selection-end-line="269" selection-end-column="16" />
+            <state relative-caret-position="282">
+              <caret line="284" column="25" lean-forward="true" selection-start-line="284" selection-start-column="25" selection-end-line="284" selection-end-column="25" />
               <folding>
-                <element signature="e#159#177#0" expanded="true" />
-                <element signature="e#1560#1982#0" expanded="false" />
-                <element signature="e#2008#2137#0" expanded="false" />
-                <element signature="e#2195#3833#0" expanded="false" />
-                <element signature="e#2369#2421#0" expanded="false" />
-                <element signature="e#3887#4569#0" expanded="false" />
+                <element signature="e#113#131#0" expanded="true" />
+                <element signature="e#434#735#0" expanded="false" />
+                <element signature="e#775#1119#0" expanded="false" />
+                <element signature="e#1168#1590#0" expanded="false" />
+                <element signature="e#1616#1745#0" expanded="false" />
+                <element signature="e#1803#2770#0" expanded="false" />
+                <element signature="e#2824#3506#0" expanded="false" />
+                <element signature="e#8549#8642#0" expanded="false" />
+                <element signature="e#8796#9052#0" expanded="false" />
+                <element signature="e#9089#9450#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scratch_5.py" pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_5.py">
+      <file leaf-file-name="scratch_6.py" pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_6.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3280">
-              <caret line="254" column="45" lean-forward="false" selection-start-line="254" selection-start-column="45" selection-end-line="254" selection-end-column="45" />
+            <state relative-caret-position="174">
+              <caret line="52" column="50" lean-forward="true" selection-start-line="52" selection-start-column="50" selection-end-line="52" selection-end-column="50" />
               <folding>
-                <element signature="e#159#177#0" expanded="true" />
-                <element signature="e#1262#1684#0" expanded="false" />
-                <element signature="e#1711#1840#0" expanded="false" />
-                <element signature="e#1899#3614#0" expanded="false" />
-                <element signature="e#2111#2163#0" expanded="false" />
-                <element signature="e#3669#4351#0" expanded="false" />
+                <element signature="e#0#27#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -97,8 +88,8 @@
       <file leaf-file-name="scratch_3.py" pinned="false" current-in-tab="false">
         <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1840">
-              <caret line="175" column="28" lean-forward="false" selection-start-line="175" selection-start-column="28" selection-end-line="175" selection-end-column="28" />
+            <state relative-caret-position="20">
+              <caret line="173" column="22" lean-forward="false" selection-start-line="173" selection-start-column="22" selection-end-line="173" selection-end-column="22" />
               <folding>
                 <element signature="e#47#112#1" expanded="false" />
                 <element signature="e#483#905#0" expanded="false" />
@@ -127,10 +118,11 @@
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
         <option value="$PROJECT_DIR$/Demo.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_2.py" />
-        <option value="$PROJECT_DIR$/Demo_Processing.py" />
-        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_3.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_4.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_5.py" />
+        <option value="$PROJECT_DIR$/Demo_Processing.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_3.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_6.py" />
         <option value="$PROJECT_DIR$/WSN.py" />
       </list>
     </option>
@@ -237,24 +229,6 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="scratch_4" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Project" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/scratch_4.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
     <configuration name="scratch_5" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -273,20 +247,38 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
+    <configuration name="scratch_6" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Project" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/scratch_6.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.WSN" />
       <item index="1" class="java.lang.String" itemvalue="Python.Demo_Processing" />
-      <item index="2" class="java.lang.String" itemvalue="Python.scratch_4" />
-      <item index="3" class="java.lang.String" itemvalue="Python.scratch_5" />
-      <item index="4" class="java.lang.String" itemvalue="Python.scratch_3" />
+      <item index="2" class="java.lang.String" itemvalue="Python.scratch_5" />
+      <item index="3" class="java.lang.String" itemvalue="Python.scratch_3" />
+      <item index="4" class="java.lang.String" itemvalue="Python.scratch_6" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.WSN" />
-        <item index="1" class="java.lang.String" itemvalue="Python.scratch_5" />
+        <item index="1" class="java.lang.String" itemvalue="Python.scratch_6" />
         <item index="2" class="java.lang.String" itemvalue="Python.scratch_3" />
-        <item index="3" class="java.lang.String" itemvalue="Python.scratch_4" />
-        <item index="4" class="java.lang.String" itemvalue="Python.Demo_Processing" />
+        <item index="3" class="java.lang.String" itemvalue="Python.Demo_Processing" />
+        <item index="4" class="java.lang.String" itemvalue="Python.scratch_5" />
       </list>
     </recent_temporary>
   </component>
@@ -385,11 +377,18 @@
       <option name="project" value="LOCAL" />
       <updated>1510178025567</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Part 2">
+      <created>1510178058552</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1510178058552</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
@@ -398,11 +397,11 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935917" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33681074" sideWeight="0.4941435" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20436817" sideWeight="0.4941435" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39791358" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29173166" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329429" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -424,17 +423,17 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935917" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28315946" sideWeight="0.4941435" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33541343" sideWeight="0.4941435" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935917" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935917" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39791358" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3978159" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329429" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
@@ -468,18 +467,106 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="62" />
+      <option name="time" value="74" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/WSN.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3180">
+          <caret line="283" column="21" lean-forward="true" selection-start-line="283" selection-start-column="21" selection-end-line="283" selection-end-column="21" />
+          <folding>
+            <element signature="e#113#131#0" expanded="true" />
+            <element signature="e#434#735#0" expanded="false" />
+            <element signature="e#775#1119#0" expanded="false" />
+            <element signature="e#1168#1590#0" expanded="false" />
+            <element signature="e#1616#1745#0" expanded="false" />
+            <element signature="e#1803#2770#0" expanded="false" />
+            <element signature="e#2824#3506#0" expanded="false" />
+            <element signature="e#8549#8642#0" expanded="false" />
+            <element signature="e#8796#9052#0" expanded="false" />
+            <element signature="e#9089#9450#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Demo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="30" column="6" lean-forward="false" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#416#444#0" expanded="false" />
+            <element signature="e#589#686#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Demo_Processing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2240">
+          <caret line="115" column="4" lean-forward="false" selection-start-line="115" selection-start-column="4" selection-end-line="115" selection-end-column="4" />
+          <folding>
+            <element signature="e#2436#2454#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WSN.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2860">
+          <caret line="228" column="0" lean-forward="true" selection-start-line="228" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
+          <folding>
+            <element signature="e#113#131#0" expanded="true" />
+            <element signature="e#434#735#0" expanded="false" />
+            <element signature="e#775#1119#0" expanded="false" />
+            <element signature="e#1168#1590#0" expanded="false" />
+            <element signature="e#1616#1745#0" expanded="false" />
+            <element signature="e#1803#2770#0" expanded="false" />
+            <element signature="e#2824#3506#0" expanded="false" />
+            <element signature="e#8549#8642#0" expanded="false" />
+            <element signature="e#8796#9052#0" expanded="false" />
+            <element signature="e#9089#9450#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3600">
+          <caret line="269" column="16" lean-forward="false" selection-start-line="269" selection-start-column="16" selection-end-line="269" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_5.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3280">
+          <caret line="254" column="45" lean-forward="false" selection-start-line="254" selection-start-column="45" selection-end-line="254" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1800">
+          <caret line="173" column="22" lean-forward="false" selection-start-line="173" selection-start-column="22" selection-end-line="173" selection-end-column="22" />
+          <folding>
+            <element signature="e#47#112#1" expanded="false" />
+            <element signature="e#483#905#0" expanded="false" />
+            <element signature="e#932#1061#0" expanded="false" />
+            <element signature="e#1120#2498#0" expanded="false" />
+            <element signature="e#1248#1300#0" expanded="false" />
+            <element signature="e#2553#3235#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Demo.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
           <caret line="30" column="6" lean-forward="false" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#71#444#0" expanded="false" />
             <element signature="e#416#444#0" expanded="false" />
             <element signature="e#589#686#0" expanded="false" />
           </folding>
@@ -500,14 +587,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3600">
           <caret line="269" column="16" lean-forward="false" selection-start-line="269" selection-start-column="16" selection-end-line="269" selection-end-column="16" />
-          <folding>
-            <element signature="e#159#177#0" expanded="true" />
-            <element signature="e#1560#1982#0" expanded="false" />
-            <element signature="e#2008#2137#0" expanded="false" />
-            <element signature="e#2195#3833#0" expanded="false" />
-            <element signature="e#2369#2421#0" expanded="false" />
-            <element signature="e#3887#4569#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -515,14 +594,76 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3280">
           <caret line="254" column="45" lean-forward="false" selection-start-line="254" selection-start-column="45" selection-end-line="254" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1840">
+          <caret line="175" column="28" lean-forward="false" selection-start-line="175" selection-start-column="28" selection-end-line="175" selection-end-column="28" />
           <folding>
-            <element signature="e#159#177#0" expanded="true" />
-            <element signature="e#1262#1684#0" expanded="false" />
-            <element signature="e#1711#1840#0" expanded="false" />
-            <element signature="e#1899#3614#0" expanded="false" />
-            <element signature="e#2111#2163#0" expanded="false" />
-            <element signature="e#3669#4351#0" expanded="false" />
+            <element signature="e#47#112#1" expanded="false" />
+            <element signature="e#483#905#0" expanded="false" />
+            <element signature="e#932#1061#0" expanded="false" />
+            <element signature="e#1120#2498#0" expanded="false" />
+            <element signature="e#1248#1300#0" expanded="false" />
+            <element signature="e#2553#3235#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WSN.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="22" column="23" lean-forward="true" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
+          <folding>
+            <element signature="e#113#131#0" expanded="true" />
+            <element signature="e#434#735#0" expanded="false" />
+            <element signature="e#775#1119#0" expanded="false" />
+            <element signature="e#1168#1590#0" expanded="false" />
+            <element signature="e#1616#1745#0" expanded="false" />
+            <element signature="e#1803#2770#0" expanded="false" />
+            <element signature="e#2824#3506#0" expanded="false" />
+            <element signature="e#8549#8642#0" expanded="false" />
+            <element signature="e#8796#9052#0" expanded="false" />
+            <element signature="e#9089#9450#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Demo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="30" column="6" lean-forward="false" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#416#444#0" expanded="false" />
+            <element signature="e#589#686#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Demo_Processing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2200">
+          <caret line="113" column="19" lean-forward="false" selection-start-line="113" selection-start-column="19" selection-end-line="113" selection-end-column="19" />
+          <folding>
+            <element signature="e#2436#2454#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3600">
+          <caret line="269" column="16" lean-forward="false" selection-start-line="269" selection-start-column="16" selection-end-line="269" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_5.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3280">
+          <caret line="254" column="45" lean-forward="false" selection-start-line="254" selection-start-column="45" selection-end-line="254" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -545,7 +686,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
           <caret line="42" column="51" lean-forward="false" selection-start-line="42" selection-start-column="51" selection-end-line="42" selection-end-column="51" />
-          <folding />
+          <folding>
+            <element signature="e#113#131#0" expanded="true" />
+            <element signature="e#434#735#0" expanded="false" />
+            <element signature="e#775#1119#0" expanded="false" />
+            <element signature="e#1168#1590#0" expanded="false" />
+            <element signature="e#1616#1745#0" expanded="false" />
+            <element signature="e#1803#2770#0" expanded="false" />
+            <element signature="e#2824#3506#0" expanded="false" />
+            <element signature="e#8549#8642#0" expanded="false" />
+            <element signature="e#8796#9052#0" expanded="false" />
+            <element signature="e#9089#9450#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -555,7 +707,6 @@
           <caret line="30" column="6" lean-forward="false" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#71#444#0" expanded="false" />
             <element signature="e#416#444#0" expanded="false" />
             <element signature="e#589#686#0" expanded="false" />
           </folding>
@@ -576,7 +727,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2600">
           <caret line="223" column="40" lean-forward="false" selection-start-line="223" selection-start-column="40" selection-end-line="223" selection-end-column="40" />
-          <folding />
+          <folding>
+            <element signature="e#113#131#0" expanded="true" />
+            <element signature="e#434#735#0" expanded="false" />
+            <element signature="e#775#1119#0" expanded="false" />
+            <element signature="e#1168#1590#0" expanded="false" />
+            <element signature="e#1616#1745#0" expanded="false" />
+            <element signature="e#1803#2770#0" expanded="false" />
+            <element signature="e#2824#3506#0" expanded="false" />
+            <element signature="e#8549#8642#0" expanded="false" />
+            <element signature="e#8796#9052#0" expanded="false" />
+            <element signature="e#9089#9450#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -584,14 +746,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3600">
           <caret line="269" column="16" lean-forward="false" selection-start-line="269" selection-start-column="16" selection-end-line="269" selection-end-column="16" />
-          <folding>
-            <element signature="e#159#177#0" expanded="true" />
-            <element signature="e#1560#1982#0" expanded="false" />
-            <element signature="e#2008#2137#0" expanded="false" />
-            <element signature="e#2195#3833#0" expanded="false" />
-            <element signature="e#2369#2421#0" expanded="false" />
-            <element signature="e#3887#4569#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -614,14 +768,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3280">
           <caret line="254" column="45" lean-forward="false" selection-start-line="254" selection-start-column="45" selection-end-line="254" selection-end-column="45" />
-          <folding>
-            <element signature="e#159#177#0" expanded="true" />
-            <element signature="e#1262#1684#0" expanded="false" />
-            <element signature="e#1711#1840#0" expanded="false" />
-            <element signature="e#1899#3614#0" expanded="false" />
-            <element signature="e#2111#2163#0" expanded="false" />
-            <element signature="e#3669#4351#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -631,7 +777,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#71#444#0" expanded="false" />
             <element signature="e#416#444#0" expanded="false" />
             <element signature="e#589#686#0" expanded="false" />
           </folding>
@@ -642,7 +787,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#113#131#0" expanded="true" />
+            <element signature="e#434#735#0" expanded="false" />
+            <element signature="e#775#1119#0" expanded="false" />
+            <element signature="e#1168#1590#0" expanded="false" />
+            <element signature="e#1616#1745#0" expanded="false" />
+            <element signature="e#1803#2770#0" expanded="false" />
+            <element signature="e#2824#3506#0" expanded="false" />
+            <element signature="e#8549#8642#0" expanded="false" />
+            <element signature="e#8796#9052#0" expanded="false" />
+            <element signature="e#9089#9450#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -652,7 +808,6 @@
           <caret line="59" column="0" lean-forward="true" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#71#444#0" expanded="false" />
             <element signature="e#416#444#0" expanded="false" />
             <element signature="e#589#686#0" expanded="false" />
           </folding>
@@ -663,7 +818,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#113#131#0" expanded="true" />
+            <element signature="e#434#735#0" expanded="false" />
+            <element signature="e#775#1119#0" expanded="false" />
+            <element signature="e#1168#1590#0" expanded="false" />
+            <element signature="e#1616#1745#0" expanded="false" />
+            <element signature="e#1803#2770#0" expanded="false" />
+            <element signature="e#2824#3506#0" expanded="false" />
+            <element signature="e#8549#8642#0" expanded="false" />
+            <element signature="e#8796#9052#0" expanded="false" />
+            <element signature="e#9089#9450#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -671,7 +837,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#113#131#0" expanded="true" />
+            <element signature="e#434#735#0" expanded="false" />
+            <element signature="e#775#1119#0" expanded="false" />
+            <element signature="e#1168#1590#0" expanded="false" />
+            <element signature="e#1616#1745#0" expanded="false" />
+            <element signature="e#1803#2770#0" expanded="false" />
+            <element signature="e#2824#3506#0" expanded="false" />
+            <element signature="e#8549#8642#0" expanded="false" />
+            <element signature="e#8796#9052#0" expanded="false" />
+            <element signature="e#9089#9450#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -679,7 +856,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#113#131#0" expanded="true" />
+            <element signature="e#434#735#0" expanded="false" />
+            <element signature="e#775#1119#0" expanded="false" />
+            <element signature="e#1168#1590#0" expanded="false" />
+            <element signature="e#1616#1745#0" expanded="false" />
+            <element signature="e#1803#2770#0" expanded="false" />
+            <element signature="e#2824#3506#0" expanded="false" />
+            <element signature="e#8549#8642#0" expanded="false" />
+            <element signature="e#8796#9052#0" expanded="false" />
+            <element signature="e#9089#9450#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -687,7 +875,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#113#131#0" expanded="true" />
+            <element signature="e#434#735#0" expanded="false" />
+            <element signature="e#775#1119#0" expanded="false" />
+            <element signature="e#1168#1590#0" expanded="false" />
+            <element signature="e#1616#1745#0" expanded="false" />
+            <element signature="e#1803#2770#0" expanded="false" />
+            <element signature="e#2824#3506#0" expanded="false" />
+            <element signature="e#8549#8642#0" expanded="false" />
+            <element signature="e#8796#9052#0" expanded="false" />
+            <element signature="e#9089#9450#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -695,7 +894,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#113#131#0" expanded="true" />
+            <element signature="e#434#735#0" expanded="false" />
+            <element signature="e#775#1119#0" expanded="false" />
+            <element signature="e#1168#1590#0" expanded="false" />
+            <element signature="e#1616#1745#0" expanded="false" />
+            <element signature="e#1803#2770#0" expanded="false" />
+            <element signature="e#2824#3506#0" expanded="false" />
+            <element signature="e#8549#8642#0" expanded="false" />
+            <element signature="e#8796#9052#0" expanded="false" />
+            <element signature="e#9089#9450#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -703,7 +913,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#113#131#0" expanded="true" />
+            <element signature="e#434#735#0" expanded="false" />
+            <element signature="e#775#1119#0" expanded="false" />
+            <element signature="e#1168#1590#0" expanded="false" />
+            <element signature="e#1616#1745#0" expanded="false" />
+            <element signature="e#1803#2770#0" expanded="false" />
+            <element signature="e#2824#3506#0" expanded="false" />
+            <element signature="e#8549#8642#0" expanded="false" />
+            <element signature="e#8796#9052#0" expanded="false" />
+            <element signature="e#9089#9450#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -772,10 +993,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_5.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="553">
+          <caret line="254" column="45" lean-forward="false" selection-start-line="254" selection-start-column="45" selection-end-line="254" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="553">
+          <caret line="269" column="16" lean-forward="false" selection-start-line="269" selection-start-column="16" selection-end-line="269" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Demo_Processing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2240">
+          <caret line="115" column="4" lean-forward="false" selection-start-line="115" selection-start-column="4" selection-end-line="115" selection-end-column="4" />
+          <folding>
+            <element signature="e#2436#2454#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Demo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="30" column="6" lean-forward="false" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#416#444#0" expanded="false" />
+            <element signature="e#589#686#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1840">
-          <caret line="175" column="28" lean-forward="false" selection-start-line="175" selection-start-column="28" selection-end-line="175" selection-end-column="28" />
+        <state relative-caret-position="20">
+          <caret line="173" column="22" lean-forward="false" selection-start-line="173" selection-start-column="22" selection-end-line="173" selection-end-column="22" />
           <folding>
             <element signature="e#47#112#1" expanded="false" />
             <element signature="e#483#905#0" expanded="false" />
@@ -787,64 +1044,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Demo_Processing.py">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_6.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2200">
-          <caret line="113" column="19" lean-forward="false" selection-start-line="113" selection-start-column="19" selection-end-line="113" selection-end-column="19" />
+        <state relative-caret-position="174">
+          <caret line="52" column="50" lean-forward="true" selection-start-line="52" selection-start-column="50" selection-end-line="52" selection-end-column="50" />
           <folding>
-            <element signature="e#2436#2454#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Demo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="30" column="6" lean-forward="false" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#71#444#0" expanded="false" />
-            <element signature="e#416#444#0" expanded="false" />
-            <element signature="e#589#686#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3600">
-          <caret line="269" column="16" lean-forward="false" selection-start-line="269" selection-start-column="16" selection-end-line="269" selection-end-column="16" />
-          <folding>
-            <element signature="e#159#177#0" expanded="true" />
-            <element signature="e#1560#1982#0" expanded="false" />
-            <element signature="e#2008#2137#0" expanded="false" />
-            <element signature="e#2195#3833#0" expanded="false" />
-            <element signature="e#2369#2421#0" expanded="false" />
-            <element signature="e#3887#4569#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_5.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3280">
-          <caret line="254" column="45" lean-forward="false" selection-start-line="254" selection-start-column="45" selection-end-line="254" selection-end-column="45" />
-          <folding>
-            <element signature="e#159#177#0" expanded="true" />
-            <element signature="e#1262#1684#0" expanded="false" />
-            <element signature="e#1711#1840#0" expanded="false" />
-            <element signature="e#1899#3614#0" expanded="false" />
-            <element signature="e#2111#2163#0" expanded="false" />
-            <element signature="e#3669#4351#0" expanded="false" />
+            <element signature="e#0#27#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WSN.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="282">
+          <caret line="284" column="25" lean-forward="true" selection-start-line="284" selection-start-column="25" selection-end-line="284" selection-end-column="25" />
+          <folding>
+            <element signature="e#113#131#0" expanded="true" />
+            <element signature="e#434#735#0" expanded="false" />
+            <element signature="e#775#1119#0" expanded="false" />
+            <element signature="e#1168#1590#0" expanded="false" />
+            <element signature="e#1616#1745#0" expanded="false" />
+            <element signature="e#1803#2770#0" expanded="false" />
+            <element signature="e#2824#3506#0" expanded="false" />
+            <element signature="e#8549#8642#0" expanded="false" />
+            <element signature="e#8796#9052#0" expanded="false" />
+            <element signature="e#9089#9450#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

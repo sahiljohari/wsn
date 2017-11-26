@@ -14,8 +14,37 @@ import timeit
 import operator
 import warnings
 import copy
+import itertools
+from itertools import chain
 
 warnings.filterwarnings("ignore")
+
+
+def connected_components(neighbors):
+    seen = set()
+
+    def component(node):
+        nodes = set([node])
+        while nodes:
+            node = nodes.pop()
+            seen.add(node)
+            nodes |= neighbors[node] - seen
+            yield node
+
+    for node in neighbors:
+        if node not in seen:
+            yield component(node)
+
+
+def largest_component(old_graph):
+    new_graph = {node: set(edge for edge in edges)
+                 for node, edges in old_graph.items()}
+    components = []
+    for component in connected_components(new_graph):
+        c = set(component)
+        components.append([edges for edges in old_graph.values()
+                           if c.intersection(edges)])
+    return components
 
 def generate_coordinates(topology, nodes):
     if topology == 0:
@@ -104,10 +133,12 @@ def graph_coloring(node_stack, adjacency_list):
 def plot_Graph(topology, nodes, avgDeg, display_mode):
     degree = {}
     adjacency_list = {}
-    color_data = {}
-    c_map = []
+    color_data = {}  # contains collection of nodes for each distinct color
+    c_map = []  # contains all the colors generated
     max_edges = []
     min_edges = []
+    bipartite_nodes = []
+    # bipartite_color = []
 
     start = timeit.default_timer()
     if topology == 0:
@@ -150,7 +181,7 @@ def plot_Graph(topology, nodes, avgDeg, display_mode):
 
     G = nx.Graph()
     G.add_nodes_from(range(nodes))
-    if display_mode == 1 or display_mode == 0:
+    if display_mode in (0, 1, 3):
         G.add_edges_from(list(pairs))
     pos = dict(zip(range(nodes), coordinates))
 
@@ -163,12 +194,13 @@ def plot_Graph(topology, nodes, avgDeg, display_mode):
             else:
                 c_map.append('black')
 
-    if display_mode == 1 or display_mode == 2:
+    if display_mode in (1, 2, 3):
         adjlist_copy = copy.deepcopy(adjacency_list)
         node_stack, terminal_size = smallest_last_ordering(degree, adjlist_copy)
-        if display_mode == 2:
+        if display_mode in (2, 3):
             node_stack_copy = copy.deepcopy(node_stack)
-            color_map, clist = graph_coloring(node_stack_copy, adjacency_list)
+            color_map, clist = graph_coloring(node_stack_copy,
+                                              adjacency_list)  #color_map->c_map ; clist contains list of distinct colors
             c_map = [None] * nodes
             for i in range(nodes):
                 if i in color_map:
@@ -179,11 +211,45 @@ def plot_Graph(topology, nodes, avgDeg, display_mode):
             for k,v in color_map.items():
                 color_data.setdefault(v, []).append(k)
 
-            color_data = {k: len(color_data[k]) for k in color_data.keys()}
-            max_color = max(color_data.items(), key=operator.itemgetter(1))[1]
+            color_count_data = {k: len(color_data[k]) for k in color_data.keys()}  # contains node count for each color
+            max_color = max(color_count_data.items(), key=operator.itemgetter(1))[1]
+
+            if display_mode == 3:
+                # Bipartite calculation
+                largest_colors = sorted(color_count_data, key=color_count_data.get, reverse=True)[:4]
+                largest_colors_combinations = list(itertools.combinations(largest_colors, 2))
+                for c_pair in largest_colors_combinations:
+                    bipartite_nodes.append((color_data[c_pair[0]], color_data[c_pair[1]]))
+
+                unique_bipartites = []
+                max_backbone = []
+
+                for node_pair in bipartite_nodes:
+                    bipartite_adj = {}
+                    for node in node_pair[0]:
+                        bipartite_adj[node] = list(set(adjacency_list[node]) & set(node_pair[1]))
+                    for node in node_pair[1]:
+                        bipartite_adj[node] = list(set(adjacency_list[node]) & set(node_pair[0]))
+                    unique_bipartites.append(copy.deepcopy(bipartite_adj))
+
+                for collection in unique_bipartites:
+                    bipartite_nodelist = []
+                    bipartite_nodelist.extend(max(largest_component(collection), key=len))
+                    max_backbone.append(list(np.unique(list(chain.from_iterable(bipartite_nodelist)))))
+
+                bipartite_backbone = sorted(max_backbone, key=len, reverse=True)[:2]
+                bipartite_nodeColors_1 = []
+                bipartite_nodeColors_2 = []
+                for node in bipartite_backbone[0]:
+                    bipartite_nodeColors_1.append([k for k, v in color_data.items() if node in v])
+                for node in bipartite_backbone[1]:
+                    bipartite_nodeColors_2.append([k for k, v in color_data.items() if node in v])
+
+                bipartite_nodeColors_1 = list(chain.from_iterable(bipartite_nodeColors_1))
+                bipartite_nodeColors_2 = list(chain.from_iterable(bipartite_nodeColors_2))
 
     print('\n-----------------------------')
-    print('Number of edges: ', len(pairs))
+    print('Number of edges: ', len(G.edges()))
     print('Max Degree: ', max_deg)
     print('Min Degree: ', min_deg)
     print('Average Degree: ', observed_avg_deg)
@@ -211,6 +277,23 @@ def plot_Graph(topology, nodes, avgDeg, display_mode):
         anim = animation.FuncAnimation(fig, animate, frames=len(node_stack), interval=500)
     elif display_mode == 2:
         nx.draw(G, pos, node_size=5, node_color=c_map, edge_color='#000000')
+    elif display_mode == 3:
+        G1 = copy.deepcopy(G)
+        G2 = copy.deepcopy(G)
+        for node in G.nodes():
+            if node not in bipartite_backbone[0]:
+                G1.remove_node(node)
+            if node not in bipartite_backbone[1]:
+                G2.remove_node(node)
+        plt.figure(1)
+        plt.axis('off')
+        plt.axis('equal')
+        nx.draw(G1, pos, node_size=10, node_color=bipartite_nodeColors_1, edge_color='#000000')
+
+        plt.figure(2)
+        plt.axis('off')
+        plt.axis('equal')
+        nx.draw(G2, pos, node_size=10, node_color=bipartite_nodeColors_2, edge_color='#000000')
 
     plt.axis('off')
     plt.axis('equal')
@@ -219,10 +302,11 @@ def plot_Graph(topology, nodes, avgDeg, display_mode):
 def main():
     nodes = int(input('Enter the number of nodes: '))
     expected_avg_deg = int(input('Enter the average degree: '))
-    topology = int(input('Select a topology - 0 (plane) | 1 (disk): '))
-    display_mode = int(input('Select display - ''0'' (RGG plot) | ''1'' (Smallest last Ordering) | ''2'' (Coloring): '))
+    topology = int(input('Select a topology - \n0 (Plane) \n1 (Disk): '))
+    display_mode = int(input(
+        'Select display - \n''0'' (RGG plot) \n''1'' (Smallest last Ordering) \n''2'' (Coloring) \n''3'' (Backbone): '))
 
-    if display_mode in (0, 1, 2):
+    if display_mode in (0, 1, 2, 3):
         plot_Graph(topology, nodes, expected_avg_deg, display_mode)
     else:
         print('Invalid input! Try again..')
