@@ -35,7 +35,6 @@ def connected_components(neighbors):
         if node not in seen:
             yield component(node)
 
-
 def largest_component(old_graph):
     new_graph = {node: set(edge for edge in edges)
                  for node, edges in old_graph.items()}
@@ -130,6 +129,44 @@ def graph_coloring(node_stack, adjacency_list):
         color_map[popped_node] = clist[c_index]
     return color_map, clist
 
+
+def backbone_selection(color_data, color_count_data, adjacency_list):
+    bipartite_nodes = []
+    unique_bipartites = []
+    max_backbone = []
+    bipartite_nodeColors_1 = []
+    bipartite_nodeColors_2 = []
+
+    largest_colors = sorted(color_count_data, key=color_count_data.get, reverse=True)[:4]
+    largest_colors_combinations = list(itertools.combinations(largest_colors, 2))
+    for c_pair in largest_colors_combinations:
+        bipartite_nodes.append((color_data[c_pair[0]], color_data[c_pair[1]]))
+
+    for node_pair in bipartite_nodes:
+        bipartite_adj = {}
+        for node in node_pair[0]:
+            bipartite_adj[node] = list(set(adjacency_list[node]) & set(node_pair[1]))
+        for node in node_pair[1]:
+            bipartite_adj[node] = list(set(adjacency_list[node]) & set(node_pair[0]))
+        unique_bipartites.append(copy.deepcopy(bipartite_adj))
+
+    for collection in unique_bipartites:
+        bipartite_nodelist = []
+        bipartite_nodelist.extend(max(largest_component(collection), key=len))
+        max_backbone.append(list(np.unique(list(chain.from_iterable(bipartite_nodelist)))))
+
+    bipartite_backbone = sorted(max_backbone, key=len, reverse=True)[:2]
+
+    for node in bipartite_backbone[0]:
+        bipartite_nodeColors_1.append([k for k, v in color_data.items() if node in v])
+    for node in bipartite_backbone[1]:
+        bipartite_nodeColors_2.append([k for k, v in color_data.items() if node in v])
+
+    bipartite_nodeColors_1 = list(chain.from_iterable(bipartite_nodeColors_1))
+    bipartite_nodeColors_2 = list(chain.from_iterable(bipartite_nodeColors_2))
+
+    return bipartite_backbone, bipartite_nodeColors_1, bipartite_nodeColors_2
+
 def plot_Graph(topology, nodes, avgDeg, display_mode):
     degree = {}
     adjacency_list = {}
@@ -137,8 +174,7 @@ def plot_Graph(topology, nodes, avgDeg, display_mode):
     c_map = []  # contains all the colors generated
     max_edges = []
     min_edges = []
-    bipartite_nodes = []
-    # bipartite_color = []
+
 
     start = timeit.default_timer()
     if topology == 0:
@@ -215,38 +251,9 @@ def plot_Graph(topology, nodes, avgDeg, display_mode):
             max_color = max(color_count_data.items(), key=operator.itemgetter(1))[1]
 
             if display_mode == 3:
-                # Bipartite calculation
-                largest_colors = sorted(color_count_data, key=color_count_data.get, reverse=True)[:4]
-                largest_colors_combinations = list(itertools.combinations(largest_colors, 2))
-                for c_pair in largest_colors_combinations:
-                    bipartite_nodes.append((color_data[c_pair[0]], color_data[c_pair[1]]))
-
-                unique_bipartites = []
-                max_backbone = []
-
-                for node_pair in bipartite_nodes:
-                    bipartite_adj = {}
-                    for node in node_pair[0]:
-                        bipartite_adj[node] = list(set(adjacency_list[node]) & set(node_pair[1]))
-                    for node in node_pair[1]:
-                        bipartite_adj[node] = list(set(adjacency_list[node]) & set(node_pair[0]))
-                    unique_bipartites.append(copy.deepcopy(bipartite_adj))
-
-                for collection in unique_bipartites:
-                    bipartite_nodelist = []
-                    bipartite_nodelist.extend(max(largest_component(collection), key=len))
-                    max_backbone.append(list(np.unique(list(chain.from_iterable(bipartite_nodelist)))))
-
-                bipartite_backbone = sorted(max_backbone, key=len, reverse=True)[:2]
-                bipartite_nodeColors_1 = []
-                bipartite_nodeColors_2 = []
-                for node in bipartite_backbone[0]:
-                    bipartite_nodeColors_1.append([k for k, v in color_data.items() if node in v])
-                for node in bipartite_backbone[1]:
-                    bipartite_nodeColors_2.append([k for k, v in color_data.items() if node in v])
-
-                bipartite_nodeColors_1 = list(chain.from_iterable(bipartite_nodeColors_1))
-                bipartite_nodeColors_2 = list(chain.from_iterable(bipartite_nodeColors_2))
+                bipartite_backbone, bipartite_nodeColors_1, bipartite_nodeColors_2 = backbone_selection(color_data,
+                                                                                                        color_count_data,
+                                                                                                        adjacency_list)
 
     print('\n-----------------------------')
     print('Number of edges: ', len(G.edges()))
