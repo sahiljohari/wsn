@@ -35,6 +35,7 @@ def connected_components(neighbors):
         if node not in seen:
             yield component(node)
 
+
 def largest_component(old_graph):
     new_graph = {node: set(edge for edge in edges)
                  for node, edges in old_graph.items()}
@@ -44,6 +45,7 @@ def largest_component(old_graph):
         components.append([edges for edges in old_graph.values()
                            if c.intersection(edges)])
     return components
+
 
 def generate_coordinates(topology, nodes):
     if topology == 0:
@@ -61,6 +63,7 @@ def generate_coordinates(topology, nodes):
 
     return coordinates
 
+
 def random_color():
     red = np.random.uniform(0, 1)
     green = np.random.uniform(0, 1)
@@ -68,9 +71,11 @@ def random_color():
 
     return red, green, blue
 
+
 def smallest_last_ordering(degree, adjacency_list):
     node_stack = []
     degreeBucket = {}
+    deleted_node_degree = {}
     terminal_size = 0
 
     for key, val in degree.items():
@@ -91,16 +96,18 @@ def smallest_last_ordering(degree, adjacency_list):
             if not degreeBucket[d]:
                 del degreeBucket[d]
 
-            degreeBucket.setdefault(d-1, []).append(item)
+            degreeBucket.setdefault(d - 1, []).append(item)
             degree[item] -= 1
             counter += 1
         node_stack.append(popped_node)
+        deleted_node_degree[popped_node] = min_deg
 
-        if len(adjacency_list)-1 == counter and terminal_size == 0:
+        if len(adjacency_list) - 1 == counter and terminal_size == 0:
             terminal_size = counter + 1
         del adjacency_list[popped_node]
 
-    return node_stack, terminal_size
+    return node_stack, terminal_size, max(deleted_node_degree.values())
+
 
 def graph_coloring(node_stack, adjacency_list):
     color_map = {}
@@ -167,6 +174,7 @@ def backbone_selection(color_data, color_count_data, adjacency_list):
 
     return bipartite_backbone, bipartite_nodeColors_1, bipartite_nodeColors_2
 
+
 def plot_Graph(topology, nodes, avgDeg, display_mode):
     degree = {}
     adjacency_list = {}
@@ -174,7 +182,6 @@ def plot_Graph(topology, nodes, avgDeg, display_mode):
     c_map = []  # contains all the colors generated
     max_edges = []
     min_edges = []
-
 
     start = timeit.default_timer()
     if topology == 0:
@@ -208,7 +215,7 @@ def plot_Graph(topology, nodes, avgDeg, display_mode):
 
     max_node = [k for k, v in degree.items() if v == max_deg]
     min_node = [k for k, v in degree.items() if v == min_deg]
- 
+
     for i in pairs:
         if i[0] in max_node or i[1] in max_node:
             max_edges.append(i)
@@ -232,11 +239,11 @@ def plot_Graph(topology, nodes, avgDeg, display_mode):
 
     if display_mode in (1, 2, 3):
         adjlist_copy = copy.deepcopy(adjacency_list)
-        node_stack, terminal_size = smallest_last_ordering(degree, adjlist_copy)
+        node_stack, terminal_size, max_degree_del = smallest_last_ordering(degree, adjlist_copy)
         if display_mode in (2, 3):
             node_stack_copy = copy.deepcopy(node_stack)
             color_map, clist = graph_coloring(node_stack_copy,
-                                              adjacency_list)  #color_map->c_map ; clist contains list of distinct colors
+                                              adjacency_list)  # color_map->c_map ; clist contains list of distinct colors
             c_map = [None] * nodes
             for i in range(nodes):
                 if i in color_map:
@@ -244,7 +251,7 @@ def plot_Graph(topology, nodes, avgDeg, display_mode):
                 else:
                     c_map[i] = clist[0]
 
-            for k,v in color_map.items():
+            for k, v in color_map.items():
                 color_data.setdefault(v, []).append(k)
 
             color_count_data = {k: len(color_data[k]) for k in color_data.keys()}  # contains node count for each color
@@ -254,17 +261,45 @@ def plot_Graph(topology, nodes, avgDeg, display_mode):
                 bipartite_backbone, bipartite_nodeColors_1, bipartite_nodeColors_2 = backbone_selection(color_data,
                                                                                                         color_count_data,
                                                                                                         adjacency_list)
+                G1 = copy.deepcopy(G)
+                G2 = copy.deepcopy(G)
+                for node in G.nodes():
+                    if node not in bipartite_backbone[0]:
+                        G1.remove_node(node)
+                    if node not in bipartite_backbone[1]:
+                        G2.remove_node(node)
+
+                coverage_list1 = set()
+                coverage_list2 = set()
+                for node in G1.nodes():
+                    for n in adjacency_list[node]:
+                        coverage_list1.add(n)
+                    coverage_list1.add(node)
+                for node in G2.nodes():
+                    for n in adjacency_list[node]:
+                        coverage_list2.add(n)
+                    coverage_list2.add(node)
 
     print('\n-----------------------------')
-    print('Number of edges: ', len(G.edges()))
-    print('Max Degree: ', max_deg)
-    print('Min Degree: ', min_deg)
-    print('Average Degree: ', observed_avg_deg)
-    if display_mode == 1:
-        print('Terminal Clique Size: ', terminal_size)
-    if display_mode == 2:
-        print('Number of Colors used: ', len(clist))
-        print('Maximum Color Size: ', max_color)
+    if display_mode in (0, 1, 2):
+        print('Number of edges: ', len(pairs))
+        print('Max Degree: ', max_deg)
+        print('Min Degree: ', min_deg)
+        print('Average Degree: ', observed_avg_deg)
+        if display_mode == 1:
+            print('Terminal Clique Size: ', terminal_size)
+            print('Maximum degree when deleted: ', max_degree_del)
+        if display_mode == 2:
+            print('Number of Colors used: ', len(clist))
+            print('Maximum Color Size: ', max_color)
+    if display_mode == 3:
+        print('Backbone 1 vertices: ', len(G1.nodes()))
+        print('Backbone 1 edges: ', len(G1.edges()))
+        print('Backbone 1 coverage: ', format((len(coverage_list1) / float(nodes)) * 100, '.2f'), '%')
+        print('Backbone 2 vertices: ', len(G2.nodes()))
+        print('Backbone 2 edges: ', len(G2.edges()))
+        print('Backbone 2 coverage: ', format((len(coverage_list2) / float(nodes)) * 100, '.2f'), '%')
+
     print('-----------------------------\n')
     print('Elapsed time: ', timeit.default_timer() - start, 'second(s)')
 
@@ -274,24 +309,19 @@ def plot_Graph(topology, nodes, avgDeg, display_mode):
         nx.draw_networkx_edges(G, pos, edgelist=min_edges, edge_color='blue', width=1.0)
     elif display_mode == 1:
         fig = plt.figure()
+
         def animate(i):
             if node_stack[i] in G.nodes():
                 plt.clf()
                 plt.axis('equal')
                 G.remove_node(node_stack[i])
                 nx.draw(G, pos, node_size=20, alpha=0.9, edge_color='#000000')
+                plt.autoscale(False)
 
-        anim = animation.FuncAnimation(fig, animate, frames=len(node_stack), interval=500)
+        anim = animation.FuncAnimation(fig, animate, frames=len(node_stack), interval=50)
     elif display_mode == 2:
         nx.draw(G, pos, node_size=5, node_color=c_map, edge_color='#000000')
     elif display_mode == 3:
-        G1 = copy.deepcopy(G)
-        G2 = copy.deepcopy(G)
-        for node in G.nodes():
-            if node not in bipartite_backbone[0]:
-                G1.remove_node(node)
-            if node not in bipartite_backbone[1]:
-                G2.remove_node(node)
         plt.figure(1)
         plt.axis('off')
         plt.axis('equal')
@@ -305,6 +335,7 @@ def plot_Graph(topology, nodes, avgDeg, display_mode):
     plt.axis('off')
     plt.axis('equal')
     plt.show()
+
 
 def main():
     nodes = int(input('Enter the number of nodes: '))
