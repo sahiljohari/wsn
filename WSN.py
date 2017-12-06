@@ -4,18 +4,18 @@
 Created on Thu Oct  5 19:36:49 2017
 @author: Sahil Johari
 """
-import numpy as np
-from scipy import spatial
-import networkx as nx
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-
-import timeit
-import operator
-import warnings
 import copy
 import itertools
+import operator
+import timeit
+import warnings
 from itertools import chain
+
+import matplotlib.animation as animation
+import matplotlib.pyplot as plt
+import networkx as nx
+import numpy as np
+from scipy import spatial
 
 warnings.filterwarnings("ignore")
 
@@ -137,12 +137,12 @@ def graph_coloring(node_stack, adjacency_list):
     return color_map, clist
 
 
-def backbone_selection(color_data, color_count_data, adjacency_list):
+def backbone_selection(G, color_data, color_count_data, adjacency_list):
     bipartite_nodes = []
     unique_bipartites = []
     max_backbone = []
-    bipartite_nodeColors_1 = []
-    bipartite_nodeColors_2 = []
+    bipartite_nodeColors = []
+    coverage_list = {}
 
     largest_colors = sorted(color_count_data, key=color_count_data.get, reverse=True)[:4]
     largest_colors_combinations = list(itertools.combinations(largest_colors, 2))
@@ -162,17 +162,52 @@ def backbone_selection(color_data, color_count_data, adjacency_list):
         bipartite_nodelist.extend(max(largest_component(collection), key=len))
         max_backbone.append(list(np.unique(list(chain.from_iterable(bipartite_nodelist)))))
 
-    bipartite_backbone = sorted(max_backbone, key=len, reverse=True)[:2]
+    bipartite_backbone = sorted(max_backbone, key=len, reverse=True)[:6]
 
-    for node in bipartite_backbone[0]:
-        bipartite_nodeColors_1.append([k for k, v in color_data.items() if node in v])
-    for node in bipartite_backbone[1]:
-        bipartite_nodeColors_2.append([k for k, v in color_data.items() if node in v])
+    subgraphs = [copy.deepcopy(G) for x in range(6)]
+    coverage_set = [set() for x in range(6)]
 
-    bipartite_nodeColors_1 = list(chain.from_iterable(bipartite_nodeColors_1))
-    bipartite_nodeColors_2 = list(chain.from_iterable(bipartite_nodeColors_2))
+    for node in G.nodes():
+        for i in range(6):
+            if node not in bipartite_backbone[i]:
+                subgraphs[i].remove_node(node)
 
-    return bipartite_backbone, bipartite_nodeColors_1, bipartite_nodeColors_2
+    for i in range(len(bipartite_backbone)):
+        while True:
+            flag = True
+            Graph = copy.deepcopy(subgraphs[i])
+            bipartite_degree_list = [Graph.degree(node) for node in
+                                     Graph.nodes() if
+                                     Graph.degree(node) > 1]
+            for n in subgraphs[i].nodes():
+                if Graph.degree(n) not in bipartite_degree_list:
+                    try:
+                        Graph.remove_node(n)
+                        flag = False
+                    except Exception:
+                        pass
+            subgraphs[i] = Graph
+            if flag:
+                break
+
+    for i in range(6):
+        for node in subgraphs[i].nodes():
+            for n in adjacency_list[node]:
+                coverage_set[i].add(n)
+            coverage_set[i].add(node)
+        coverage_list[subgraphs[i]] = len(coverage_set[i])
+
+    largest_backbone_coverage = sorted(coverage_list, key=coverage_list.get, reverse=True)[:2]
+
+    for i in range(2):
+        temp_colors = []
+        for node in largest_backbone_coverage[i].nodes():
+            for key in color_data.keys():
+                if node in color_data[key]:
+                    temp_colors.append(key)
+        bipartite_nodeColors.append(temp_colors)
+
+    return sorted(coverage_list, key=coverage_list.get, reverse=True)[:2], bipartite_nodeColors, coverage_list
 
 
 def plot_Graph(topology, nodes, avgDeg, display_mode):
@@ -258,27 +293,9 @@ def plot_Graph(topology, nodes, avgDeg, display_mode):
             max_color = max(color_count_data.items(), key=operator.itemgetter(1))[1]
 
             if display_mode == 3:
-                bipartite_backbone, bipartite_nodeColors_1, bipartite_nodeColors_2 = backbone_selection(color_data,
-                                                                                                        color_count_data,
-                                                                                                        adjacency_list)
-                G1 = copy.deepcopy(G)
-                G2 = copy.deepcopy(G)
-                for node in G.nodes():
-                    if node not in bipartite_backbone[0]:
-                        G1.remove_node(node)
-                    if node not in bipartite_backbone[1]:
-                        G2.remove_node(node)
-
-                coverage_list1 = set()
-                coverage_list2 = set()
-                for node in G1.nodes():
-                    for n in adjacency_list[node]:
-                        coverage_list1.add(n)
-                    coverage_list1.add(node)
-                for node in G2.nodes():
-                    for n in adjacency_list[node]:
-                        coverage_list2.add(n)
-                    coverage_list2.add(node)
+                largest_backbone_coverage, bipartite_nodeColors, coverage_list = backbone_selection(G, color_data,
+                                                                                                    color_count_data,
+                                                                                                    adjacency_list)
 
     print('\n-----------------------------')
     if display_mode in (0, 1, 2):
@@ -293,12 +310,14 @@ def plot_Graph(topology, nodes, avgDeg, display_mode):
             print('Number of Colors used: ', len(clist))
             print('Maximum Color Size: ', max_color)
     if display_mode == 3:
-        print('Backbone 1 vertices: ', len(G1.nodes()))
-        print('Backbone 1 edges: ', len(G1.edges()))
-        print('Backbone 1 coverage: ', format((len(coverage_list1) / float(nodes)) * 100, '.2f'), '%')
-        print('Backbone 2 vertices: ', len(G2.nodes()))
-        print('Backbone 2 edges: ', len(G2.edges()))
-        print('Backbone 2 coverage: ', format((len(coverage_list2) / float(nodes)) * 100, '.2f'), '%')
+        print('Backbone 1 vertices: ', len(largest_backbone_coverage[0].nodes()))
+        print('Backbone 1 edges: ', len(largest_backbone_coverage[0].edges()))
+        print('Backbone 1 coverage: ',
+              format((coverage_list[largest_backbone_coverage[0]] / float(nodes)) * 100, '.2f'), '%')
+        print('Backbone 2 vertices: ', len(largest_backbone_coverage[1].nodes()))
+        print('Backbone 2 edges: ', len(largest_backbone_coverage[1].edges()))
+        print('Backbone 2 coverage: ',
+              format((coverage_list[largest_backbone_coverage[1]] / float(nodes)) * 100, '.2f'), '%')
 
     print('-----------------------------\n')
     print('Elapsed time: ', timeit.default_timer() - start, 'second(s)')
@@ -323,17 +342,18 @@ def plot_Graph(topology, nodes, avgDeg, display_mode):
         nx.draw(G, pos, node_size=5, node_color=c_map, edge_color='#000000')
     elif display_mode == 3:
         plt.figure(1)
-        plt.axis('off')
         plt.axis('equal')
-        nx.draw(G1, pos, node_size=10, node_color=bipartite_nodeColors_1, edge_color='#000000')
+        nx.draw(largest_backbone_coverage[0], pos, node_size=10, node_color=bipartite_nodeColors[0],
+                edge_color='#000000')
 
         plt.figure(2)
-        plt.axis('off')
         plt.axis('equal')
-        nx.draw(G2, pos, node_size=10, node_color=bipartite_nodeColors_2, edge_color='#000000')
+        nx.draw(largest_backbone_coverage[1], pos, node_size=10, node_color=bipartite_nodeColors[1],
+                edge_color='#000000')
 
     plt.axis('off')
     plt.axis('equal')
+
     plt.show()
 
 
