@@ -20,6 +20,7 @@ from scipy import spatial
 warnings.filterwarnings("ignore")
 
 
+# Private functions
 def connected_components(neighbors):
     seen = set()
 
@@ -72,15 +73,18 @@ def random_color():
     return red, green, blue
 
 
+# -----------
+
+# Functions to implement the algorithms
 def smallest_last_ordering(degree, adjacency_list):
     node_stack = []
     degreeBucket = {}
     deleted_node_degree = {}
     terminal_size = 0
-
+    # Create a degree bucket
     for key, val in degree.items():
         degreeBucket.setdefault(val, []).append(key)
-
+    # Delete the smallest nodes recursively
     while adjacency_list:
         min_deg, min_nodes = min(degreeBucket.items(), key=operator.itemgetter(0))
         popped_node = min_nodes.pop()
@@ -99,9 +103,10 @@ def smallest_last_ordering(degree, adjacency_list):
             degreeBucket.setdefault(d - 1, []).append(item)
             degree[item] -= 1
             counter += 1
+        # Add the deleted node to the SLO stack
         node_stack.append(popped_node)
         deleted_node_degree[popped_node] = min_deg
-
+        # Calculate terminal clique size
         if len(adjacency_list) - 1 == counter and terminal_size == 0:
             terminal_size = counter + 1
         del adjacency_list[popped_node]
@@ -112,9 +117,10 @@ def smallest_last_ordering(degree, adjacency_list):
 def graph_coloring(node_stack, adjacency_list):
     color_map = {}
     clist = [random_color()]
-
+    # Iterate the SLO stack and assign colors to the nodes
     while node_stack:
         popped_node = node_stack.pop()
+        # Fetch adjacent nodes for each node and check for their colors
         adjacent_nodes = adjacency_list[popped_node]
         temp = []
         for node in adjacent_nodes:
@@ -143,12 +149,13 @@ def backbone_selection(G, color_data, color_count_data, adjacency_list):
     max_backbone = []
     bipartite_nodeColors = []
     coverage_list = {}
-
+    # Fetch the largest color classes and create their combinations
     largest_colors = sorted(color_count_data, key=color_count_data.get, reverse=True)[:4]
     largest_colors_combinations = list(itertools.combinations(largest_colors, 2))
+    # Get nodes for each color combination
     for c_pair in largest_colors_combinations:
         bipartite_nodes.append((color_data[c_pair[0]], color_data[c_pair[1]]))
-
+    # Remove duplicate nodes to create bipartite node list with unique nodes
     for node_pair in bipartite_nodes:
         bipartite_adj = {}
         for node in node_pair[0]:
@@ -156,14 +163,14 @@ def backbone_selection(G, color_data, color_count_data, adjacency_list):
         for node in node_pair[1]:
             bipartite_adj[node] = list(set(adjacency_list[node]) & set(node_pair[0]))
         unique_bipartites.append(copy.deepcopy(bipartite_adj))
-
+    # Find the largest component backbones from the collection of bipartite node lists
     for collection in unique_bipartites:
         bipartite_nodelist = []
         bipartite_nodelist.extend(max(largest_component(collection), key=len))
         max_backbone.append(list(np.unique(list(chain.from_iterable(bipartite_nodelist)))))
 
     bipartite_backbone = sorted(max_backbone, key=len, reverse=True)[:6]
-
+    # Calculate the coverage of each backbone and select the largest 2 of them
     subgraphs = [copy.deepcopy(G) for x in range(6)]
     coverage_set = [set() for x in range(6)]
 
@@ -198,7 +205,7 @@ def backbone_selection(G, color_data, color_count_data, adjacency_list):
         coverage_list[subgraphs[i]] = len(coverage_set[i])
 
     largest_backbone_coverage = sorted(coverage_list, key=coverage_list.get, reverse=True)[:2]
-
+    # Determine the node colors for the largest backbones obtained
     for i in range(2):
         temp_colors = []
         for node in largest_backbone_coverage[i].nodes():
@@ -209,6 +216,8 @@ def backbone_selection(G, color_data, color_count_data, adjacency_list):
 
     return sorted(coverage_list, key=coverage_list.get, reverse=True)[:2], bipartite_nodeColors, coverage_list
 
+
+# ------------
 
 def plot_Graph(topology, nodes, avgDeg, display_mode):
     degree = {}
@@ -225,7 +234,7 @@ def plot_Graph(topology, nodes, avgDeg, display_mode):
         r = np.sqrt(avgDeg / nodes)
     else:
         r = 0
-
+    # RGG generation
     coordinates = generate_coordinates(topology, nodes)
 
     tree = spatial.KDTree(coordinates)
@@ -323,10 +332,12 @@ def plot_Graph(topology, nodes, avgDeg, display_mode):
     print('Elapsed time: ', timeit.default_timer() - start, 'second(s)')
 
     if display_mode == 0:
+        # Part I
         nx.draw(G, pos, node_size=2, node_color=c_map, alpha=0.5, edge_color='#00916a')
         nx.draw_networkx_edges(G, pos, edgelist=max_edges, edge_color='red', width=1.0)
         nx.draw_networkx_edges(G, pos, edgelist=min_edges, edge_color='blue', width=1.0)
     elif display_mode == 1:
+        # Part II - Smallest last ordering
         fig = plt.figure()
 
         def animate(i):
@@ -339,8 +350,10 @@ def plot_Graph(topology, nodes, avgDeg, display_mode):
 
         anim = animation.FuncAnimation(fig, animate, frames=len(node_stack), interval=50)
     elif display_mode == 2:
+        # Part II - Graph coloring
         nx.draw(G, pos, node_size=5, node_color=c_map, edge_color='#000000')
     elif display_mode == 3:
+        # Part III - Bipartite Backbone Selection
         plt.figure(1)
         plt.axis('equal')
         nx.draw(largest_backbone_coverage[0], pos, node_size=10, node_color=bipartite_nodeColors[0],
