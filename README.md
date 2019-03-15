@@ -8,3 +8,5 @@ In this project, I have:
 - Determined a bipartite subgraph of the overall RGG, or sensor network, that adequately covers all vertices that make up the overall network.
 
 I have included a detailed report on this in the repository. It is an interesting project and covers many fundamental topics in Algorithms such as Bipartite graphs, Graph-coloring, BFS/DFS.
+
+The entire code is in **WSN.py**
